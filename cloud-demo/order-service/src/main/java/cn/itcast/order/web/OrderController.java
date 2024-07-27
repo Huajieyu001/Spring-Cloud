@@ -15,8 +15,8 @@ import javax.xml.transform.sax.TemplatesHandler;
 @RequestMapping("order")
 public class OrderController {
 
-   @Autowired
-   private OrderService orderService;
+    @Autowired
+    private OrderService orderService;
 
     @GetMapping("{orderId}")
     public Order queryOrderByUserId(@PathVariable("orderId") Long orderId) {

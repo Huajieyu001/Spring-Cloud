@@ -6,6 +6,14 @@ spring:
     username: root
     password: qq331173500
     driver-class-name: com.mysql.jdbc.Driver
+#  application:
+#    name: userservice
+#  cloud:
+#    nacos:
+#      server-addr: localhost:8848
+#      discovery:
+#        cluster-name: SH
+#        ephemeral: true
 mybatis:
   type-aliases-package: cn.itcast.user.pojo
   configuration:
@@ -15,3 +23,9 @@ logging:
     cn.itcast: debug
   pattern:
     dateformat: MM-dd HH:mm:ss:SSS
+#eureka:
+#  client:
+#    service-url:
+#pattern:
+#  data: localData
+#      defaultZone: http://localhost:9080/eureka

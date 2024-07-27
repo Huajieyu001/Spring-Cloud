@@ -6,6 +6,13 @@ spring:
     username: root
     password: qq331173500
     driver-class-name: com.mysql.jdbc.Driver
+
+#  cloud:
+#    nacos:
+#      server-addr: localhost:80
+#      discovery:
+#        cluster-name: WX
+#        namespace: aca69c37-a135-43bb-9aec-634c12fb2419
 mybatis:
   type-aliases-package: cn.itcast.user.pojo
   configuration:
@@ -15,3 +22,15 @@ logging:
     cn.itcast: debug
   pattern:
     dateformat: MM-dd HH:mm:ss:SSS
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:9080/eureka
+#
+#userservice:
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.alibaba.cloud.nacos.ribbon.NacosRule
+#ribbon:
+#  eager-load:
+#    enabled: true
+#    clients: userservice
