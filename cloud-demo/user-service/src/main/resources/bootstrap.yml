@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: userservice
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      server-addr: localhost:80
+      config:
+        file-extension: yaml
+
+pattern:
+  data: bootData
