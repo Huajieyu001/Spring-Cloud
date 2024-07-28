@@ -58,7 +58,7 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>orderApp</finalName>
+<!--        <finalName>orderApp</finalName>-->
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
