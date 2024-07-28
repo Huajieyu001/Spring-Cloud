@@ -1,0 +1,53 @@
+
+server:
+  port: 10024
+spring:
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+      discovery:
+        cluster-name:
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://userservice
+          predicates:
+            - Path=/user/**
+            - After=2020-01-20T17:42:47.789-07:00[Asia/Shanghai]
+        - id: order-service
+          uri: lb://orderservice
+          predicates: # 添加断言规则
+            - Path=/order/**
+          filters: # 添加过滤器，对userservice生效
+            - AddRequestHeader=X-Request-red, RequestXYZ
+            - AddResponseHeader=X-Request-red, ResponseXYZ
+      default-filters: # 添加默认过滤器，对所有服务生效，如果同时使用gateway.routes.filters，则同时生效
+        - AddResponseHeader=X-Request-red, defaultResponseXYZ
+      globalcors: # 全局的跨域处理
+        add-to-simple-url-handler-mapping: true # 解决options请求被拦截问题
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: # 允许哪些网站的跨域请求
+              - "http://localhost:5500"
+# 当浏览器是http://127.0.0.1:5500/index.html页面的时候，设置localhost:5500无法成功跨域，需要把localhost改写成127.0.0.1，反之，允许127.0.0.1的时候，就无法通过localhost访问
+# 总结下来就是，跨域的时候，localhost和127.0.0.1是不等价的
+#              - "http://127.0.0.1:5500"
+              - "http://www.leyou.com"
+            allowedMethods: # 允许的跨域ajax的请求方式
+              - "GET"
+              - "POST"
+              - "DELETE"
+              - "PUT"
+              - "OPTIONS"
+            allowedHeaders: "*" # 允许在请求中携带的头信息
+            allowCredentials: true # 是否允许携带cookie
+            maxAge: 360000 # 这次跨域检测的有效期
+
+  #            - Cookie=chocolate, ch.p
+#            - Before=2030-01-20T17:42:47.789-07:00[Asia/Shanghai]
+#            - Between=2020-01-20T17:42:47.789-07:00[Asia/Shanghai],2024-01-20T17:42:47.789-07:00[Asia/Shanghai]
+
+  profiles:
+    active: dev
