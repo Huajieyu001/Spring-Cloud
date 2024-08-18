@@ -54,6 +54,15 @@ public class UserController {
      */
     @GetMapping("/{id}")
     public User queryById(@PathVariable("id") Long id) {
+        if(id == 1){
+            try {
+                Thread.sleep(60);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        } else if (id == 2) {
+            throw new RuntimeException();
+        }
         return userService.queryById(id);
     }
 }
