@@ -3,7 +3,9 @@ package cn.itcast.order.service;
 import cn.itcast.feign.clients.UserClient;
 import cn.itcast.order.mapper.OrderMapper;
 import cn.itcast.order.pojo.Order;
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -35,5 +37,10 @@ public class OrderService {
 
         // 4.返回
         return order;
+    }
+
+    @SentinelResource("chain")
+    public void testChain(){
+        System.err.println("testChain!!!");
     }
 }

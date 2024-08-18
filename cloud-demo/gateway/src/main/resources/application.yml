@@ -1,12 +1,12 @@
 
 server:
-  port: 10024
+  port: 10010
 spring:
   application:
     name: gateway
   cloud:
     nacos:
-      server-addr: localhost:8848
+      server-addr: 127.0.0.1:8848
       discovery:
         cluster-name:
     gateway:
@@ -24,7 +24,8 @@ spring:
             - AddRequestHeader=X-Request-red, RequestXYZ
             - AddResponseHeader=X-Request-red, ResponseXYZ
       default-filters: # 添加默认过滤器，对所有服务生效，如果同时使用gateway.routes.filters，则同时生效
-        - AddResponseHeader=X-Request-red, defaultResponseXYZ
+        - AddResponseHeader=X-Request-red,defaultResponseXYZ
+        - AddRequestHeader=Origin,gateway
       globalcors: # 全局的跨域处理
         add-to-simple-url-handler-mapping: true # 解决options请求被拦截问题
         corsConfigurations:
